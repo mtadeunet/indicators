@@ -1,2 +1,1 @@
-# indicators
-Example application on how to use pandas for finance
+This is an example application on how to create an indicator.
