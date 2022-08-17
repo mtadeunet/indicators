@@ -1,5 +1,7 @@
+
 from binance.spot import Spot
 from specs import OHLCV_SPEC, INTERVALS
+from client.base import ClientBase
 
 BINANCE_KLINE_SPEC = {
     "open_time": int,
@@ -16,12 +18,13 @@ BINANCE_KLINE_SPEC = {
     "ignore": int,
 }
 
-class Binance:
-    def __init__(self, settings):
+class Binance(ClientBase):
+    def __init__(self):
+        super().__init__(max_kline_records=1000)
         self._client = Spot()
 
     def convert_interval(self, interval: INTERVALS):
-        convertion = {
+        mapping = {
             "Minutes1": "1m",
             "Minutes5": "5m",
             "Minutes30": "30m",
@@ -30,24 +33,15 @@ class Binance:
             "Hours12": "12h",
             "Days1": "1d",
             "Week1": "1w",
-            "Month1": "1m"
+            "Month1": "1M"
         }
 
-        return convertion[interval.name]
+        return mapping[interval.name]
 
-    def ohlcv(self, pair: str, interval: INTERVALS, **kwargs):
-        """Get OHLCV values
-        Args:
-            symbol (str): the trading pair
-            interval (INTERVALS): the interval of kline, e.g 1m, 5m, 1h, 1d, etc.
-        Keyword Args:
-            limit (int, optional): limit the results. Default 500; max 1000.
-            start_time (int, optional): Timestamp in ms to get aggregate trades from INCLUSIVE.
-            end_time (int, optional): Timestamp in ms to get aggregate trades until INCLUSIVE.
-        """
+    def _do_ohlcv(self, pair: str, interval: INTERVALS, **kwargs):
         try:
             records = self._client.klines(pair, self.convert_interval(interval),
-                limit=kwargs.get("limit"), startTime=kwargs.get("start_time"), endTime=kwargs.get("end_time"))
+                limit=kwargs.get("limit"), startTime=kwargs.get("start_time") * 1000, endTime=kwargs.get("end_time") * 1000)
         except Exception as e:
             print(e)
             return []
@@ -62,3 +56,6 @@ class Binance:
             candles.append(dict(zip(OHLCV_SPEC, updated_record)))
 
         return candles
+
+    def trades(self):
+        pass

@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import IntEnum
 
 OHLCV_SPEC = {
     "id": int,
@@ -10,14 +10,14 @@ OHLCV_SPEC = {
 }
 
 
-class INTERVALS(Enum):
-    Minutes1 = 1,
-    Minutes5 = 2,
-    Minutes10 = 3,
-    Minutes30 = 4,
-    Hours1 = 5,
-    Hours4 = 6,
-    Hours12 = 7,
-    Days1 = 8,
-    Days2 = 9,
-    Week1 = 10
+class INTERVALS(IntEnum):
+    Minutes1 = 60,
+    Minutes5 = 120,
+    Minutes30 = 1800,
+    Hours1 = 3600,
+    Hours4 = 14400,
+    Hours12 = 43200,
+    Days1 = 86400,
+    Days2 = 172800,
+    Week1 = 604800
+

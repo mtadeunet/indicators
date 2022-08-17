@@ -1,3 +1,6 @@
 pybit
 binance-connector
 pandas
+pandas_ta
+matplotlib
+scipy
