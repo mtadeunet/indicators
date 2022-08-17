@@ -1,0 +1,3 @@
+pybit
+binance-connector
+pandas
