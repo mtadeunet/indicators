@@ -50,7 +50,7 @@ class ByBit(ClientBase):
         """
         try:
             records = self._client.query_kline(symbol=pair, interval=self.convert_interval(interval),
-                limit=kwargs.get("limit"), from_time=kwargs.get("start_time") * 1000)
+                limit=kwargs.get("limit"), from_time=kwargs.get("start_time"))
         except Exception as e:
             print(e)
             return []

@@ -41,7 +41,7 @@ class Binance(ClientBase):
     def _do_ohlcv(self, pair: str, interval: INTERVALS, **kwargs):
         try:
             records = self._client.klines(pair, self.convert_interval(interval),
-                limit=kwargs.get("limit"), startTime=kwargs.get("start_time") * 1000, endTime=kwargs.get("end_time") * 1000)
+                limit=kwargs.get("limit"), startTime=kwargs.get("start_time"), endTime=kwargs.get("end_time"))
         except Exception as e:
             print(e)
             return []

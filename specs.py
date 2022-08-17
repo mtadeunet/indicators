@@ -11,13 +11,13 @@ OHLCV_SPEC = {
 
 
 class INTERVALS(IntEnum):
-    Minutes1 = 60,
-    Minutes5 = 120,
-    Minutes30 = 1800,
-    Hours1 = 3600,
-    Hours4 = 14400,
-    Hours12 = 43200,
-    Days1 = 86400,
-    Days2 = 172800,
-    Week1 = 604800
+    Minutes1 = 60000,
+    Minutes5 = 120000,
+    Minutes30 = 1800000,
+    Hours1 = 3600000,
+    Hours4 = 14400000,
+    Hours12 = 43200000,
+    Days1 = 86400000,
+    Days2 = 172800000,
+    Week1 = 604800000
 

@@ -29,7 +29,8 @@ class ClientBase:
 
         candles = []
         while necessary_records:
-            records = self._do_ohlcv(pair, interval, limit=min(necessary_records, limit), start_time=start_time, end_time=end_time)
+            records = self._do_ohlcv(pair, interval, limit=min(necessary_records, limit),
+                start_time=start_time, end_time=end_time)
             candles.extend(records)
 
             necessary_records = max(0, necessary_records - len(records))
